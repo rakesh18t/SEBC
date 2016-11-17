@@ -1,65 +1,78 @@
-1. Access CM Server via .ssh
+login as: root
+Authenticating with public key "imported-openssh-key"
 
-	login as: root
-	Authenticating with public key "imported-openssh-key"
-	Last login: Mon Nov 14 15:52:37 2016 from 84.167.109.10
+[root@ip-172-31-4-101 ~]# lsblk
+NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+xvdf 202:80   0   1T  0 disk
+xvde 202:64   0  50G  0 disk /
 
-2. Make an EBS volume available for use - 'lsblk'
+[root@ip-172-31-4-101 ~]# mkfs -t ext4 /dev/xvdf
+mke2fs 1.41.12 (17-May-2010)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+67108864 inodes, 268435456 blocks
+13421772 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=4294967296
+8192 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968,
+        102400000, 214990848
 
-	[root@ip-172-31-13-101 ~]# lsblk
-	NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
-	xvdf 202:80   0   1T  0 disk /data
-	xvde 202:64   0  32G  0 disk /
+Writing inode tables: done
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done
 
-3. Create an ext4 file system on the volume 'xvdf'
+This filesystem will be automatically checked every 34 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
 
-	[root@ip-172-31-13-101 ~]# mkfs -t ext4
+[root@ip-172-31-4-101 ~]# mkdir /data
 
-4. Create mount point directory for the volume '/data'
+[root@ip-172-31-4-101 ~]# mount /dev/xvdf /data
 
-	[root@ip-172-31-13-101 ~]# mkdir /data
+[root@ip-172-31-4-101 ~]# df
+Filesystem      1K-blocks   Used  Available Use% Mounted on
+/dev/xvde         8256952 665500    7172024   9% /
+tmpfs             7685696      0    7685696   0% /dev/shm
+/dev/xvdf      1056894132 204056 1003002988   1% /data
+[root@ip-172-31-4-101 ~]# cp /etc/fstab /etc/fstab.orig
 
-5. Mount Volume
+[root@ip-172-31-4-101 ~]# cd /etc/
 
-	[root@ip-172-31-13-101 ~]# mount /dev/xvdf /data
+[root@ip-172-31-4-101 etc]# ls -al /dev/disk/by-uuid/
+total 0
+drwxr-xr-x. 2 root root  80 Nov 15 21:03 .
+drwxr-xr-x. 5 root root 100 Nov 15 20:54 ..
+lrwxrwxrwx. 1 root root  10 Nov 15 20:54 44d27f92-d3df-4207-80ea-22830afccf03 ->                                                                                                                      ../../xvde
+lrwxrwxrwx. 1 root root  10 Nov 15 21:03 7ad9d6d6-8330-43fa-8514-b6209d26662f ->                                                                                                                      ../../xvdf
 
-6. Show results
 
-	[root@ip-172-31-13-101 etc]# df
-	Filesystem      1K-blocks   Used  Available Use% Mounted on
-	/dev/xvde         8256952 780824    7056700  10% /
-	tmpfs             7685696      0    7685696   0% /dev/shm
-	/dev/xvdf      1056894132 204056 1003002988   1% /data
+[root@ip-172-31-4-101 etc]# nano fstab
 
-7. Make copy of fstab call 'fstab.orig'
+[root@ip-172-31-4-101 etc]# mount -a
 
-	cp /etc/fstab /etc/fstab.orig
+[root@ip-172-31-4-101 etc]# lsblk
+NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+xvdf 202:80   0   1T  0 disk /data
+xvde 202:64   0  50G  0 disk /
 
-	[root@ip-172-31-13-101 etc]# ls -a
-	.                        filesystems     motd            rpc
-	..                       fstab           mtab            rpm
-	acpi                     fstab.orig      my.cnf          rsyslog.conf
 
-8. Edit fstab to auto mount volume on system reboot, add entry on edit:
+[root@ip-172-31-4-101 etc]# resize2fs /dev/xvde
+resize2fs 1.41.12 (17-May-2010)
+Filesystem at /dev/xvde is mounted on /; on-line resizing required
+old desc_blocks = 1, new_desc_blocks = 4
+Performing an on-line resize of /dev/xvde to 13107200 (4k) blocks.
+The filesystem on /dev/xvde is now 13107200 blocks long.
 
-	/dev/xvdf       /data   ext4    defaults        1       2
-
-9. Get UUID for volume 'dev/xvdf'
-
-	[root@ip-172-31-13-101 etc]# ls -al /dev/disk/by-uuid/
-	total 0
-	drwxr-xr-x. 2 root root  80 Nov 14 15:51 .
-	drwxr-xr-x. 5 root root 100 Nov 14 14:36 ..
-	lrwxrwxrwx. 1 root root  10 Nov 14 14:36 44d27f92-d3df-4207-80ea-22830afccf03 -> ../../xvde
-	lrwxrwxrwx. 1 root root  10 Nov 14 15:51 87fddd4a-1329-44cf-a295-d178a2d894ea -> ../../xvdf
-
-10. Edit fstab and use UUID (as recommended) 
-
-	87fddd4a-1329-44cf-a295-d178a2d894ea    /data   ext4    defaults,nofail 0       2
-
-11. Test volume mount, if no error - all OK!
-
-	[root@ip-172-31-13-101 etc]# mount -a
-	[root@ip-172-31-13-101 etc]#
-
+[root@ip-172-31-4-101 etc]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/xvde        50G  697M   47G   2% /
+tmpfs           7.4G     0  7.4G   0% /dev/shm
+/dev/xvdf      1008G  200M  957G   1% /data
 
