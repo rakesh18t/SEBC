@@ -1,0 +1,28 @@
+0_CM_treasure_hunt.md
+
+1. What is ubertask optimizations?
+	Runs "sufficiently small" jobs sequentially within a single JVM. "Small" is defined by the mapreduce.job.ubertask.maxmaps, mapreduce.job.ubertask.maxreduces, and mapreduce.job.ubertask.maxbytes settings
+
+2. Where in CM is the Kerberos Security Realm value displayed?
+	Administration ---> Settings ---> Kerberos
+
+3. Which CDH service(s) host a property for enabling Kerberos authentication?
+	Cluster drop down
+
+4. How do you upgrade the CM agents?
+	Manually or wizard after CM server has been upgraded.
+
+5. Give the tsquery statement used to chart Hue's CPU utilization?
+	select cpu_system_rate + cpu_user_rate where category=ROLE and serviceType = MGMT
+
+6. Name all the roles that make up the Hive service
+	HMS  Hive Metastore Server
+	WHCS  WebHCat Server
+	HS2  HiveServer2
+	G  Gateway
+
+7. What steps must be completed before integrating Cloudera Manager with Kerberos?
+	Set up a working KDC. Cloudera Manager supports MIT KDC and Active Directory.
+	The KDC should be configured to have non-zero ticket lifetime and renewal lifetime. CDH will not work properly if tickets are not renewable.
+	OpenLdap client libraries should be installed on the Cloudera Manager Server host if you want to use Active Directory. Also, Kerberos client libraries should be installed on ALL hosts.
+	Cloudera Manager needs an account that has permissions to create other accounts in the KDC.
