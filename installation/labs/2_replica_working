@@ -1,0 +1,50 @@
+1. Grant slave access
+
+	mysql> grant replication slave on *.* to 'root'@'ip-172-31-4-102.eu-west-1.compute.internal
+	    '> ' identified by 'admin';
+	Query OK, 0 rows affected (0.00 sec)
+
+	mysql> set global binlog_format = 'row';
+	Query OK, 0 rows affected (0.00 sec)
+
+	mysql> flush tables with read lock;
+	Query OK, 0 rows affected (0.01 sec)
+
+	mysql> unlock tables;
+	Query OK, 0 rows affected (0.00 sec)
+
+	mysql> SHOW VARIABLES LIKE 'server_id';
+	+---------------+-------+
+	| Variable_name | Value |
+	+---------------+-------+
+	| server_id     | 1     |
+	+---------------+-------+
+	1 row in set (0.00 sec)
+
+2. Master status
+
+	mysql> show master status;
+	+-------------------------+----------+--------------+------------------+
+	| File                    | Position | Binlog_Do_DB | Binlog_Ignore_DB |
+	+-------------------------+----------+--------------+------------------+
+	| mysql_binary_log.000004 | 15902479 |              |                  |
+	+-------------------------+----------+--------------+------------------+
+	1 row in set (0.00 sec)
+
+	mysql> quit;
+	Bye
+	[root@ip-172-31-4-101 ~]#
+
+3. 
+	mysql> change master to master_host='ip-172-31-4-101.eu-west-1.compute.internal',master_user='root',master_password='admin',master_log_file='mysql_binary_log.000004',master_log_pos=15902479;
+	Query OK, 0 rows affected (0.01 sec)
+
+	mysql> SHOW VARIABLES LIKE 'server_id';
+	+---------------+-------+
+	| Variable_name | Value |
+	+---------------+-------+
+	| server_id     | 2     |
+	+---------------+-------+
+	1 row in set (0.00 sec)
+
+	mysql> slave start;
