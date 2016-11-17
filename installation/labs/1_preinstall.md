@@ -98,3 +98,67 @@ Authenticating with public key "imported-openssh-key"
 	tmpfs           7.4G     0  7.4G   0% /dev/shm
 	/dev/xvdf      1008G  200M  957G   1% /data
 
+8. getent all hosts
+
+	[root@ip-172-31-4-101 etc]# getent hosts 127.0.0.1
+	127.0.0.1       localhost.localdomain localhost
+	
+	[root@ip-172-31-4-101 etc]# getent hosts 172.31.4.101
+	172.31.4.101    ip-172-31-4-101.eu-west-1.compute.internal
+	
+	[root@ip-172-31-4-101 etc]# getent hosts 172.31.4.102
+	172.31.4.102    ip-172-31-4-102.eu-west-1.compute.internal
+	
+	[root@ip-172-31-4-101 etc]# getent hosts 172.31.4.103
+	172.31.4.103    ip-172-31-4-103.eu-west-1.compute.internal
+	
+	[root@ip-172-31-4-101 etc]# getent hosts 172.31.4.104
+	172.31.4.104    ip-172-31-4-104.eu-west-1.compute.internal
+	
+	[root@ip-172-31-4-101 etc]# getent hosts 172.31.4.105
+	172.31.4.105    ip-172-31-4-105.eu-west-1.compute.internal
+
+9. Install nscd and start service
+
+	[root@ip-172-31-4-101 etc]# yum install nscd
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	..
+	..
+	..
+
+	--> Processing Dependency: glibc = 2.12-1.192.el6 for package: nscd-2.12-1.192.el6.x86_64
+	..
+	..
+	Installed:
+ 	nscd.x86_64 0:2.12-1.192.el6
+
+	Dependency Updated:
+	  glibc.x86_64 0:2.12-1.192.el6      glibc-common.x86_64 0:2.12-1.192.el6      tzdata.noarch 0:2016i-1.el6
+
+	Complete!
+	[root@ip-172-31-4-101 etc]# service nscd start
+	Starting nscd:                                             [  OK  ]
+	[root@ip-172-31-4-101 etc]# chkconfig nscd  on
+
+10. Install ntp and start service
+
+	[root@ip-172-31-4-101 etc]# yum install ntp
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	..
+	..
+	..
+	Installed:
+	  ntp.x86_64 0:4.2.6p5-10.el6.centos.1
+
+	Dependency Installed:
+	  ntpdate.x86_64 0:4.2.6p5-10.el6.centos.1
+
+	Complete!
+
+	[root@ip-172-31-4-101 etc]# service ntpd start
+	Starting ntpd:                                             [  OK  ]
+	[root@ip-172-31-4-101 etc]#
+
+
