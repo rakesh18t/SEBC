@@ -1,0 +1,11 @@
+3_cm.md
+
+mysql> GRANT ALL PRIVILEGES ON hive.* TO 'hive'@'172.31.2.245' identified by 'hive'
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON rman.* TO 'rman'@'172.31.2.245' identified by 'rman';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON oozie.* TO 'oozie'@'172.31.2.245' identified by 'oozie';
+Query OK, 0 rows affected (0.00 sec)
