@@ -1,0 +1,156 @@
+0_setup.md
+
+
+1. Region, AMI ID, OS
+
+	EU-Ireland (eu-west-1a), (ami-42718735), CentOS-6.5-GA-03.3-f4325b48-37b0-405a-9847-236c64622e3e-ami-6be4dc02.2 
+
+2. Volume Space on each node:
+
+	172.31.2.245 - CM
+		[root@ip-172-31-2-245 ~]# df
+		Filesystem      1K-blocks   Used Available Use% Mounted on
+		/dev/xvde        51606140 715816  48269424   2% /
+		tmpfs             7685696      0   7685696   0% /dev/shm
+		/dev/xvdf      1032123136 204132 979490204   1% /data
+
+	------------ ******* ------------
+
+	172.31.2.246
+		[root@ip-172-31-2-246 ~]# df
+		Filesystem      1K-blocks   Used Available Use% Mounted on
+		/dev/xvde        51606140 714504  48270736   2% /
+		tmpfs             7685696      0   7685696   0% /dev/shm
+		/dev/xvdf      1032123136 204132 979490204   1% /data
+
+	------------ ******* ------------
+	
+	172.31.2.247
+		[root@ip-172-31-2-247 ~]# df
+		Filesystem      1K-blocks   Used Available Use% Mounted on
+		/dev/xvde        51606140 714504  48270736   2% /
+		tmpfs             7685696      0   7685696   0% /dev/shm
+		/dev/xvdf      1032123136 204132 979490204   1% /data
+
+	------------ ******* ------------
+
+	172.31.2.248
+		[root@ip-172-31-2-248 ~]# df
+		Filesystem      1K-blocks   Used Available Use% Mounted on
+		/dev/xvde        51606140 714504  48270736   2% /
+		tmpfs             7685696      0   7685696   0% /dev/shm
+		/dev/xvdf      1032123136 204132 979490204   1% /data
+
+	------------ ******* ------------
+
+	172.31.2.249
+		[root@ip-172-31-2-249 ~]# df
+		Filesystem      1K-blocks   Used Available Use% Mounted on
+		/dev/xvde        51606140 714504  48270736   2% /
+		tmpfs             7685696      0   7685696   0% /dev/shm
+		/dev/xvdf      1032123136 204132 979490204   1% /data
+
+3. yum repolist enabled (all nodes)
+
+	[root@ip-172-31-2-245 etc]# yum repolist enabled
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	 * base: repo.uk.bigstepcloud.com
+	 * extras: centos.serverspace.co.uk
+	 * updates: mirror.vorboss.net
+	repo id                        repo name                                  status
+	base                           CentOS-6 - Base                            6,696
+	extras                         CentOS-6 - Extras                             62
+	updates                        CentOS-6 - Updates                           603
+	repolist: 7,361
+
+	------------ ******* ------------
+
+	[root@ip-172-31-2-246 ~]# yum repolist enabled
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.vooservers.com
+	 * extras: centos.serverspace.co.uk
+	 * updates: mirror.vorboss.net
+	base                                                     | 3.7 kB     00:00
+	extras                                                   | 3.4 kB     00:00
+	updates                                                  | 3.4 kB     00:00
+	repo id                        repo name                                  status
+	base                           CentOS-6 - Base                            6,696
+	extras                         CentOS-6 - Extras                             62
+	updates                        CentOS-6 - Updates                           603
+	repolist: 7,361
+
+	------------ ******* ------------
+
+	[root@ip-172-31-2-247 ~]# yum repolist enabled
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	 * base: repo.uk.bigstepcloud.com
+	 * extras: repo.uk.bigstepcloud.com
+	 * updates: repo.uk.bigstepcloud.com
+	base                                                     | 3.7 kB     00:00
+	extras                                                   | 3.4 kB     00:00
+	updates                                                  | 3.4 kB     00:00
+	repo id                        repo name                                  status
+	base                           CentOS-6 - Base                            6,696
+	extras                         CentOS-6 - Extras                             62
+	updates                        CentOS-6 - Updates                           603
+	repolist: 7,361
+
+	------------ ******* ------------
+
+	[root@ip-172-31-2-248 ~]# yum repolist enabled
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	 * base: repo.uk.bigstepcloud.com
+	 * extras: centos.serverspace.co.uk
+	 * updates: mirror.vorboss.net
+	base                                                     | 3.7 kB     00:00
+	extras                                                   | 3.4 kB     00:00
+	updates                                                  | 3.4 kB     00:00
+	repo id                        repo name                                  status
+	base                           CentOS-6 - Base                            6,696
+	extras                         CentOS-6 - Extras                             62
+	updates                        CentOS-6 - Updates                           603
+	repolist: 7,361
+
+	------------ ******* ------------
+
+	[root@ip-172-31-2-249 ~]# yum repolist enabled
+	Loaded plugins: fastestmirror, presto
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.vooservers.com
+	 * extras: centos.serverspace.co.uk
+	 * updates: mirror.vorboss.net
+	base                                                     | 3.7 kB     00:00
+	extras                                                   | 3.4 kB     00:00
+	updates                                                  | 3.4 kB     00:00
+	repo id                        repo name                                  status
+	base                           CentOS-6 - Base                            6,696
+	extras                         CentOS-6 - Extras                             62
+	updates                        CentOS-6 - Updates                           603
+	repolist: 7,361
+
+4. Node IP's
+	172.31.2.249    ip-172-31-2-249.eu-west-1.compute.internal
+	172.31.2.248    ip-172-31-2-248.eu-west-1.compute.internal
+	172.31.2.247    ip-172-31-2-247.eu-west-1.compute.internal
+	172.31.2.246    ip-172-31-2-246.eu-west-1.compute.internal
+	172.31.2.245    ip-172-31-2-245.eu-west-1.compute.internal
+
+5. Create Users 'bavaria - UID 2700' and 'saxony - UID 2800', add to groups 'democratic & social' respctively
+
+	[root@ip-172-31-2-245 ~]# groupadd democratic
+	[root@ip-172-31-2-245 ~]# groupadd social
+
+	[root@ip-172-31-2-245 ~]# useradd -u 2700 -g democratic bavaria
+	[root@ip-172-31-2-245 ~]# useradd -u 2800 -g social saxony
+
+	/etc/passwd
+		bavaria:x:2700:500::/home/bavaria:/bin/bash
+		saxony:x:2800:501::/home/saxony:/bin/bash
+
+	/etc/group
+		democratic:x:500:
+		social:x:501:
