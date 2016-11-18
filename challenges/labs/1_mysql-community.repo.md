@@ -277,6 +277,28 @@ CentOS-Base.repo  CentOS-Debuginfo.repo  CentOS-Media.repo  CentOS-Vault.repo  m
 	Cleaning up...
 	[root@ip-172-31-2-245 etc]#
 
+------------- ************ ----------------
+
+	mysql> create database scm
+	    -> ;
+	Query OK, 1 row affected (0.00 sec)
+
+	mysql> create database rman;
+	Query OK, 1 row affected (0.00 sec)
+
+	mysql> create database hive;
+	Query OK, 1 row affected (0.00 sec)
+
+	mysql> create database oozie;
+	Query OK, 1 row affected (0.00 sec)
+
+	mysql> create database hue;
+	Query OK, 1 row affected (0.00 sec)
+
+	mysql> create database sentry;
+	Query OK, 1 row affected (0.00 sec)
+
+	mysql>
 
 
 
