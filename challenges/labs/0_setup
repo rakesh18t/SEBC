@@ -63,3 +63,20 @@ Host IP's
 172.31.15.105   ip-172-31-15-105.eu-west-2.compute.internal
 172.31.12.92    ip-172-31-12-92.eu-west-2.compute.internal
 172.31.11.246   ip-172-31-11-246.eu-west-2.compute.internal
+
+User Additions
+
+[root@ip-172-31-12-221 init.d]# groupadd hackers
+[root@ip-172-31-12-221 init.d]# groupadd crackers
+[root@ip-172-31-12-221 init.d]# useradd -u 2700 -g crackers donald
+[root@ip-172-31-12-221 init.d]# useradd -u 2800 -g hackers vladimir
+
+List passwd:
+
+donald:x:2700:503::/home/donald:/bin/bash
+vladimir:x:2800:502::/home/vladimir:/bin/bash
+
+Group Entry:
+
+hackers:x:502:
+crackers:x:503:
