@@ -13,23 +13,7 @@
 17/02/17 18:59:08 INFO mapreduce.Job: Job job_1487317976933_0001 running in uber mode : false
 17/02/17 18:59:08 INFO mapreduce.Job:  map 0% reduce 0%
 ^C[hdfs@ip-172-31-22-220 jars]$ time  hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.10.0.jar teragen -D dfs.blocksize=96m -D mapred.map.tasks=4 51200000 /user/raffles/tgen512m
-java.io.IOException: Output directory /user/raffles/tgen512m already exists.
-        at org.apache.hadoop.examples.terasort.TeraGen.run(TeraGen.java:293)
-        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
-        at org.apache.hadoop.examples.terasort.TeraGen.main(TeraGen.java:309)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:606)
-        at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
-        at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
-        at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:606)
-        at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
-        at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+
 
 real    0m2.424s
 user    0m3.278s
