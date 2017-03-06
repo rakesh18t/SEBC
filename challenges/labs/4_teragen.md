@@ -1,5 +1,5 @@
 4_teragen.md
-
+```
 [root@ip-172-31-22-220 jars]# su hdfs
 [hdfs@ip-172-31-22-220 jars]$  hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.10.0.jar teragen -D dfs.blocksize=96m -D mapred.map.tasks=4 51200000 /user/raffles/tgen512m
 17/02/17 18:59:00 INFO client.RMProxy: Connecting to ResourceManager at ip-172-31-22-220.us-west-1.compute.internal/172.31.22.220:8032
@@ -18,3 +18,4 @@
 real    0m2.424s
 user    0m3.278s
 sys     0m0.164s
+```
